@@ -358,7 +358,6 @@ const SearchList = forwardRef(function SearchList({ onClose }: SearchListProps, 
 				flexShrink={1}
 				h='full'
 				w='full'
-				data-qa='sidebar-search-result'
 				aria-live='polite'
 				aria-atomic='true'
 				aria-busy={isLoading}

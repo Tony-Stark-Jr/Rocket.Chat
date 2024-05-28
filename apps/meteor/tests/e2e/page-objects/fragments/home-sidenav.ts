@@ -33,10 +33,6 @@ export class HomeSidenav {
 		return this.page.locator('role=button[name="Create"]');
 	}
 
-	get inputSearch(): Locator {
-		return this.page.locator('[placeholder="Search (Ctrl+K)"]').first();
-	}
-
 	get userProfileMenu(): Locator {
 		return this.page.getByRole('button', { name: 'User menu' });
 	}
@@ -47,6 +43,10 @@ export class HomeSidenav {
 
 	get sidebarToolbar(): Locator {
 		return this.page.getByRole('toolbar', { name: 'Sidebar actions' });
+	}
+
+	get sidebarSearchSection() {
+		return this.page.getByRole('navigation', { name: 'sidebar' }).getByRole('searchbox');
 	}
 
 	get accountProfileOption(): Locator {
@@ -65,7 +65,7 @@ export class HomeSidenav {
 	}
 
 	async openAdministrationByLabel(text: string): Promise<void> {
-		await this.page.locator('role=button[name="Administration"]').click();
+		await this.page.locator('role=button[name="Manage"]').click();
 		await this.page.locator(`role=menuitem[name="${text}"]`).click();
 	}
 
@@ -79,8 +79,8 @@ export class HomeSidenav {
 		await this.page.locator(`role=menuitem[name="${text}"]`).click();
 	}
 
-	async openSearch(): Promise<void> {
-		await this.page.locator('role=button[name="Search"]').click();
+	async typeSearch(text: string): Promise<void> {
+		await this.sidebarSearchSection.fill(text);
 	}
 
 	async logout(): Promise<void> {
@@ -94,8 +94,7 @@ export class HomeSidenav {
 	}
 
 	async openChat(name: string): Promise<void> {
-		await this.page.locator('role=navigation >> role=button[name=Search]').click();
-		await this.page.locator('role=search >> role=searchbox').fill(name);
+		await this.typeSearch(name);
 		await this.page.locator(`role=search >> role=listbox >> role=link >> text="${name}"`).click();
 		await this.waitForChannel();
 	}
