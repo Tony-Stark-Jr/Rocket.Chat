@@ -196,7 +196,7 @@ test.describe('SAML', () => {
 		});
 	});
 
-	test('Allow password change for OAuth users', async ({  api }) => {
+	test('Allow password change for OAuth users', async ({ api }) => {
 		await test.step("should not send password reset mail if 'Allow Password Change for OAuth Users' setting is disabled", async () => {
 			expect((await setSettingValueById(api, 'Accounts_AllowPasswordChangeForOAuthUsers', false)).status()).toBe(200);
 
