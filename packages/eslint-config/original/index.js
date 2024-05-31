@@ -7,6 +7,8 @@ module.exports = {
 		'../variables/index.js',
 		'../es6/index.js',
 		'../imports/index.js',
+		'plugin:prettier/recommended',
+		'plugin:import/typescript',
 	],
 
 	parserOptions: {
